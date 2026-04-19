@@ -51,7 +51,14 @@
 <section class="featured-section">
     <h2 class="section-title">Featured Books</h2>
     <div class="book-grid">
-        {{ range first 3 (where .Site.RegularPages "Section" "ebooks") }}
+        {{ range first 3 ((where .Site.RegularPages "Section" "ebooks").ByParam "book_number") }}
+        {{ if .Params.coming_soon }}
+        <div class="book-card coming-soon">
+            <div class="card-coming-soon-overlay">
+                <span class="card-coming-soon-text">Coming Soon</span>
+            </div>
+        </div>
+        {{ else }}
         <div class="book-card">
             {{ with .Params.cover }}<img src="{{ . | relURL }}" alt="{{ $.Title }} cover" loading="lazy">{{ end }}
             <h3>{{ .Title }}</h3>
@@ -59,6 +66,7 @@
             <p class="book-age">Ages {{ .Params.age_range }}</p>
             <a href="{{ .Permalink }}" class="card-link">Learn More</a>
         </div>
+        {{ end }}
         {{ end }}
     </div>
     <a href="{{ "ebooks/" | relURL }}" class="section-cta">View All Books →</a>
