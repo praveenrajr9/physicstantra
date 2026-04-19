@@ -4,7 +4,7 @@ book_number: 4
 hero: "Nia the Ant"
 topic: "Electromagnetism"
 cover: "/images/books/book4-cover.jpg"
-age_range: "9-13"
+age_range: "8+"
 description: "Nia returns in an electrifying adventure where she must harness the power of electricity and magnetism to save her home."
 coming_soon: true
 draft: false

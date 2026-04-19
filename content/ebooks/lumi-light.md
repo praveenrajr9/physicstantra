@@ -4,7 +4,7 @@ book_number: 5
 hero: "Lumi the Firefly"
 topic: "Light & Waves"
 cover: "/images/books/book5-cover.jpg"
-age_range: "10-14"
+age_range: "8+"
 description: "Lumi the Firefly embarks on a dazzling quest to understand light, color, and the wave nature of everything we see."
 coming_soon: true
 draft: false

@@ -4,7 +4,7 @@ book_number: 7
 hero: "Atom the Mouse"
 topic: "Atoms & Quantum Physics"
 cover: "/images/books/book7-cover.jpg"
-age_range: "11-15"
+age_range: "8+"
 description: "Atom the Mouse shrinks down to explore the bizarre quantum world where particles can be in two places at once and nothing is quite what it seems."
 coming_soon: true
 draft: false

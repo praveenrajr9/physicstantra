@@ -4,7 +4,7 @@ book_number: 8
 hero: "Tempo the Cheetah"
 topic: "Relativity & Spacetime"
 cover: "/images/books/book8-cover.jpg"
-age_range: "12-15+"
+age_range: "8+"
 description: "Tempo the Cheetah races at incredible speeds and discovers that time itself can stretch, space can bend, and the universe is far stranger than it appears."
 coming_soon: true
 draft: false

@@ -63,7 +63,7 @@ theme = "PaperMod"
 
   [params.homeInfoParams]
     Title = "Welcome to Physicstantra"
-    Content = "Explore the wonders of physics through illustrated ebooks, hands-on experiments, and engaging videos for young scientists ages 8-15."
+    Content = "Explore the wonders of physics through illustrated ebooks, hands-on experiments, and engaging videos for young scientists ages 8+."
 
   [[params.socialIcons]]
     name = "youtube"

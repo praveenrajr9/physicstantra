@@ -4,7 +4,7 @@ book_number: 6
 hero: "Echo the Dolphin"
 topic: "Sound & Vibration"
 cover: "/images/books/book6-cover.jpg"
-age_range: "10-14"
+age_range: "8+"
 description: "Dive deep with Echo the Dolphin into the world of sound, vibration, and the invisible waves that carry music, speech, and whale songs."
 coming_soon: true
 draft: false

@@ -5,7 +5,7 @@ hero: "Nia the Ant"
 topic: "Newton's Laws of Motion"
 cover: "/images/books/book1-cover.jpg"
 affiliate_url: "https://www.amazon.com/dp/B0GX2YSHK9"
-age_range: "8-12"
+age_range: "8+"
 description: "Join Nia the tiny ant as she uses the three laws of motion to outsmart bigger, stronger animals in the Great Race of Willow Woods."
 draft: false
 ---

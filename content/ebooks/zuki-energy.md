@@ -4,7 +4,7 @@ book_number: 3
 hero: "Zuki the Zebra"
 topic: "Energy, Work & Time"
 cover: "/images/books/book3-cover.jpg"
-age_range: "9-13"
+age_range: "8+"
 description: "Zuki the Zebra discovers that energy is everywhere — and that understanding work, power, and time is the secret to getting anything done."
 coming_soon: true
 draft: false
