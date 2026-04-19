@@ -5,7 +5,7 @@
 </section>
 <div class="category-filter">
     <button class="filter-btn active" data-category="all">All</button>
-    {{ range hugo.Data.video_categories }}
+    {{ range site.Data.video_categories }}
     <button class="filter-btn" data-category="{{ .slug }}">{{ .name }}</button>
     {{ end }}
 </div>

@@ -2,7 +2,8 @@ baseURL = "https://physicstantra.com/"
 languageCode = "en-us"
 title = "Physicstantra"
 theme = "PaperMod"
-paginate = 10
+[pagination]
+  pagerSize = 10
 
 [taxonomies]
   category = "categories"
