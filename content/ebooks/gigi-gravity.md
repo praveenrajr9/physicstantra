@@ -4,7 +4,7 @@ book_number: 2
 hero: "Gigi the Giraffe"
 topic: "Gravity"
 cover: "/images/books/book2-cover.jpg"
-affiliate_url: "https://www.amazon.com/dp/XXXXX?tag=YOUR-AFFILIATE-ID"
+affiliate_url: "https://www.amazon.com/dp/B0GX2WZ9L5"
 age_range: "8-12"
 description: "Follow Gigi the Giraffe on an extraordinary adventure to uncover the mystery of gravity — from falling apples to bending spacetime."
 draft: false
