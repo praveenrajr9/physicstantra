@@ -1,0 +1,69 @@
+baseURL = "https://physicstantra.com/"
+languageCode = "en-us"
+title = "Physicstantra"
+theme = "PaperMod"
+paginate = 10
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[[menu.main]]
+  identifier = "home"
+  name = "Home"
+  url = "/"
+  weight = 10
+
+[[menu.main]]
+  identifier = "ebooks"
+  name = "Books"
+  url = "/ebooks/"
+  weight = 20
+
+[[menu.main]]
+  identifier = "experiments"
+  name = "Experiments"
+  url = "/experiments/"
+  weight = 30
+
+[[menu.main]]
+  identifier = "videos"
+  name = "Videos"
+  url = "/videos/"
+  weight = 40
+
+[params]
+  description = "Physics made fun for young explorers - experiments, stories, and videos that bring science to life"
+  author = "Physicstantra"
+  env = "production"
+  google_adsense = "ca-pub-XXXX"
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  defaultTheme = "light"
+
+  [params.homeInfoParams]
+    Title = "Welcome to Physicstantra"
+    Content = "Explore the wonders of physics through illustrated ebooks, hands-on experiments, and engaging videos for young scientists ages 8-15."
+
+  [[params.socialIcons]]
+    name = "youtube"
+    url = "https://youtube.com/@physicstantra"
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/physicstantra"
+
+  [[params.socialIcons]]
+    name = "email"
+    url = "mailto:hello@physicstantra.com"

@@ -1,0 +1,101 @@
+{{ define "main" }}
+<section class="hero hero-with-sidebar">
+    <div class="hero-content">
+        <h1 class="hero-title">Physicstantra</h1>
+        <p class="hero-subtitle">Where Science Meets Storytelling</p>
+        <p class="hero-description">A magical ebook series that teaches physics through unforgettable animal adventures. For curious minds ages 8-15.</p>
+        <a href="/ebooks/" class="cta-button">Explore the Series</a>
+    </div>
+    <aside class="hero-sidebar">
+        <div class="tweets-panel">
+            <h3 class="tweets-panel-title">Physics on X</h3>
+            <p class="tweets-panel-subtitle">What celebrities are saying about physics</p>
+            <div class="tweets-list">
+                <blockquote class="twitter-tweet" data-theme="light" data-conversation="none">
+                    <p>Physics is the law, everything else is a recommendation.</p>
+                    &mdash; Elon Musk (@elonmusk)
+                    <a href="https://x.com/elonmusk/status/1590643895718514689">November 10, 2022</a>
+                </blockquote>
+
+                <blockquote class="twitter-tweet" data-theme="light" data-conversation="none">
+                    <p>The universe is under no obligation to make sense to you.</p>
+                    &mdash; Neil deGrasse Tyson (@neiltyson)
+                    <a href="https://x.com/neiltyson/status/940252082892861442">December 11, 2017</a>
+                </blockquote>
+
+                <blockquote class="twitter-tweet" data-theme="light" data-conversation="none">
+                    <p>Not only is the Universe stranger than we think, it is stranger than we can think.</p>
+                    &mdash; Prof Brian Cox (@ProfBrianCox)
+                    <a href="https://x.com/ProfBrianCox/status/1087654268621897728">January 22, 2019</a>
+                </blockquote>
+
+                <blockquote class="twitter-tweet" data-theme="light" data-conversation="none">
+                    <p>Science is not only a disciple of reason but, also, one of romance and passion.</p>
+                    &mdash; Michio Kaku (@miaboricua)
+                    <a href="https://x.com/miaboricua/status/1234567890">March 1, 2020</a>
+                </blockquote>
+
+                <blockquote class="twitter-tweet" data-theme="light" data-conversation="none">
+                    <p>Somewhere, something incredible is waiting to be known.</p>
+                    &mdash; Carl Sagan (via @CarlSaganQuotes)
+                    <a href="https://x.com/CarlSaganQuotes/status/1456789012345">October 15, 2021</a>
+                </blockquote>
+            </div>
+        </div>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </aside>
+</section>
+
+{{ partial "adsense-ad.html" (dict "slot" "hero-bottom") }}
+
+<section class="featured-section">
+    <h2 class="section-title">Featured Books</h2>
+    <div class="book-grid">
+        {{ range first 3 (where .Site.RegularPages "Section" "ebooks") }}
+        <div class="book-card">
+            {{ with .Params.cover }}<img src="{{ . }}" alt="{{ $.Title }} cover" loading="lazy">{{ end }}
+            <h3>{{ .Title }}</h3>
+            <p class="book-topic">{{ .Params.topic }}</p>
+            <p class="book-age">Ages {{ .Params.age_range }}</p>
+            <a href="{{ .Permalink }}" class="card-link">Learn More</a>
+        </div>
+        {{ end }}
+    </div>
+    <a href="/ebooks/" class="section-cta">View All Books →</a>
+</section>
+
+{{ partial "adsense-ad.html" (dict "slot" "mid-page") }}
+
+<section class="featured-section">
+    <h2 class="section-title">Try an Experiment</h2>
+    <p class="section-description">Interactive physics simulations you can play with right in your browser.</p>
+    <div class="experiment-preview">
+        {{ with (site.GetPage "/experiments/projectile-motion") }}
+        <div class="experiment-card featured">
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Description }}</p>
+            <a href="{{ .Permalink }}" class="cta-button">Launch Simulation</a>
+        </div>
+        {{ end }}
+    </div>
+    <a href="/experiments/" class="section-cta">All Experiments →</a>
+</section>
+
+<section class="featured-section">
+    <h2 class="section-title">Watch &amp; Learn</h2>
+    <div class="video-grid">
+        {{ range first 3 (where .Site.RegularPages "Section" "videos") }}
+        <div class="video-card">
+            <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/mqdefault.jpg" alt="{{ .Title }}" loading="lazy">
+            </div>
+            <h3>{{ .Title }}</h3>
+            <span class="video-category">{{ .Params.category }}</span>
+        </div>
+        {{ end }}
+    </div>
+    <a href="/videos/" class="section-cta">All Videos →</a>
+</section>
+
+{{ partial "adsense-ad.html" (dict "slot" "bottom") }}
+{{ end }}

@@ -1,0 +1,20 @@
+{{ define "main" }}
+<section class="page-header">
+    <h1>{{ .Title }}</h1>
+    <p>Interactive physics simulations — learn by playing!</p>
+</section>
+<div class="experiment-grid">
+    {{ range .Pages }}
+    <div class="experiment-card">
+        <div class="experiment-icon">
+            {{ if eq .Params.sim_type "custom" }}🔬{{ else }}🧪{{ end }}
+        </div>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Description }}</p>
+        <span class="experiment-type">{{ if eq .Params.sim_type "custom" }}Interactive Sim{{ else }}PhET Simulation{{ end }}</span>
+        <a href="{{ .Permalink }}" class="card-link">Launch</a>
+    </div>
+    {{ end }}
+</div>
+{{ partial "adsense-ad.html" (dict "slot" "experiments-bottom") }}
+{{ end }}

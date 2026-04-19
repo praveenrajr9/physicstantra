@@ -1,0 +1,17 @@
+{{ define "main" }}
+<article class="video-detail">
+    <h1>{{ .Title }}</h1>
+    <div class="video-player">
+        <iframe
+            src="https://www.youtube.com/embed/{{ .Params.youtube_id }}"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            title="{{ .Title }}">
+        </iframe>
+    </div>
+    <div class="video-content">
+        {{ .Content }}
+    </div>
+    {{ partial "adsense-ad.html" (dict "slot" "video-bottom") }}
+</article>
+{{ end }}

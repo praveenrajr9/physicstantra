@@ -1,0 +1,35 @@
+{{ define "main" }}
+{{ if .Params.coming_soon }}
+<article class="book-detail">
+    <div class="coming-soon-fullpage">
+        <span class="book-number">Book {{ .Params.book_number }}</span>
+        <h1>{{ .Title }}</h1>
+        <p class="book-topic">{{ .Params.topic }}</p>
+        <div class="coming-soon-big">Coming Soon</div>
+    </div>
+</article>
+{{ else }}
+<article class="book-detail">
+    <div class="book-detail-grid">
+        <div class="book-cover">
+            {{ with .Params.cover }}<img src="{{ . }}" alt="{{ $.Title }} cover">{{ end }}
+        </div>
+        <div class="book-info">
+            <span class="book-number">Book {{ .Params.book_number }}</span>
+            <h1>{{ .Title }}</h1>
+            <div class="book-meta">
+                <span class="meta-item">Topic: {{ .Params.topic }}</span>
+                <span class="meta-item">Hero: {{ .Params.hero }}</span>
+                <span class="meta-item">Ages: {{ .Params.age_range }}</span>
+            </div>
+            <div class="book-description">{{ .Content }}</div>
+            {{ with .Params.affiliate_url }}
+            <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="affiliate-button">Buy on Amazon</a>
+            {{ end }}
+        </div>
+    </div>
+    {{ partial "affiliate-disclosure.html" . }}
+    {{ partial "adsense-ad.html" (dict "slot" "book-bottom") }}
+</article>
+{{ end }}
+{{ end }}

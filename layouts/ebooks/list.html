@@ -1,0 +1,28 @@
+{{ define "main" }}
+<section class="page-header">
+    <h1>{{ .Title }}</h1>
+    <p>One unforgettable journey through the laws of the universe.</p>
+</section>
+<div class="book-grid full">
+    {{ range .Pages.ByParam "book_number" }}
+    {{ if .Params.coming_soon }}
+    <div class="book-card coming-soon">
+        <div class="card-coming-soon-overlay">
+            <span class="card-coming-soon-text">Coming Soon</span>
+        </div>
+    </div>
+    {{ else }}
+    <div class="book-card">
+        {{ with .Params.cover }}<img src="{{ . }}" alt="{{ $.Title }} cover" loading="lazy">{{ end }}
+        <span class="book-number">Book {{ .Params.book_number }}</span>
+        <h3>{{ .Title }}</h3>
+        <p class="book-topic">{{ .Params.topic }}</p>
+        <p class="book-hero">Hero: {{ .Params.hero }}</p>
+        <p class="book-age">Ages {{ .Params.age_range }}</p>
+        <a href="{{ .Permalink }}" class="card-link">Details & Buy</a>
+    </div>
+    {{ end }}
+    {{ end }}
+</div>
+{{ partial "adsense-ad.html" (dict "slot" "books-bottom") }}
+{{ end }}

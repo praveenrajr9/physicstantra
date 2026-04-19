@@ -1,0 +1,9 @@
+{{ if eq .Params.sim_type "custom" }}
+<div class="sim-container" id="sim-canvas"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+<script src="/js/experiments/{{ .Params.sim_file }}"></script>
+{{ else if eq .Params.sim_type "phet" }}
+<div class="sim-container phet-embed">
+    <iframe src="{{ .Params.phet_url }}" allowfullscreen loading="lazy"></iframe>
+</div>
+{{ end }}
