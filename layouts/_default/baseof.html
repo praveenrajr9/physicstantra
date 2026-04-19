@@ -16,7 +16,7 @@
             <a href="{{ "/" | relURL }}" class="nav-logo">Physicstantra</a>
             <div class="nav-links">
                 {{ range .Site.Menus.main }}
-                <a href="{{ .URL }}" class="nav-link">{{ .Name }}</a>
+                <a href="{{ .URL }}" class="nav-link"{{ if .Params.external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Name }}</a>
                 {{ end }}
             </div>
         </div>
@@ -26,6 +26,7 @@
     </main>
     <footer class="site-footer">
         <div class="footer-container">
+            <p class="footer-connect">Connect with me on <a href="https://www.linkedin.com/in/praveenrajr9/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
             {{ partial "affiliate-disclosure.html" . }}
             <p>&copy; {{ now.Year }} Physicstantra. All rights reserved.</p>
         </div>

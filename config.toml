@@ -41,6 +41,14 @@ theme = "PaperMod"
   url = "/videos/"
   weight = 40
 
+[[menu.main]]
+  identifier = "about"
+  name = "About Me"
+  url = "https://www.linkedin.com/in/praveenrajr9/"
+  weight = 50
+  [menu.main.params]
+    external = true
+
 [params]
   description = "Physics made fun for young explorers - experiments, stories, and videos that bring science to life"
   author = "Physicstantra"
