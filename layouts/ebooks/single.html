@@ -12,7 +12,7 @@
 <article class="book-detail">
     <div class="book-detail-grid">
         <div class="book-cover">
-            {{ with .Params.cover }}<img src="{{ . }}" alt="{{ $.Title }} cover">{{ end }}
+            {{ with .Params.cover }}<img src="{{ . | relURL }}" alt="{{ $.Title }} cover">{{ end }}
         </div>
         <div class="book-info">
             <span class="book-number">Book {{ .Params.book_number }}</span>

@@ -4,7 +4,7 @@
         <h1 class="hero-title">Physicstantra</h1>
         <p class="hero-subtitle">Where Science Meets Storytelling</p>
         <p class="hero-description">A magical ebook series that teaches physics through unforgettable animal adventures. For curious minds ages 8-15.</p>
-        <a href="/ebooks/" class="cta-button">Explore the Series</a>
+        <a href="{{ "ebooks/" | relURL }}" class="cta-button">Explore the Series</a>
     </div>
     <aside class="hero-sidebar">
         <div class="tweets-panel">
@@ -53,7 +53,7 @@
     <div class="book-grid">
         {{ range first 3 (where .Site.RegularPages "Section" "ebooks") }}
         <div class="book-card">
-            {{ with .Params.cover }}<img src="{{ . }}" alt="{{ $.Title }} cover" loading="lazy">{{ end }}
+            {{ with .Params.cover }}<img src="{{ . | relURL }}" alt="{{ $.Title }} cover" loading="lazy">{{ end }}
             <h3>{{ .Title }}</h3>
             <p class="book-topic">{{ .Params.topic }}</p>
             <p class="book-age">Ages {{ .Params.age_range }}</p>
@@ -61,7 +61,7 @@
         </div>
         {{ end }}
     </div>
-    <a href="/ebooks/" class="section-cta">View All Books →</a>
+    <a href="{{ "ebooks/" | relURL }}" class="section-cta">View All Books →</a>
 </section>
 
 {{ partial "adsense-ad.html" (dict "slot" "mid-page") }}
@@ -78,7 +78,7 @@
         </div>
         {{ end }}
     </div>
-    <a href="/experiments/" class="section-cta">All Experiments →</a>
+    <a href="{{ "experiments/" | relURL }}" class="section-cta">All Experiments →</a>
 </section>
 
 <section class="featured-section">
@@ -94,7 +94,7 @@
         </div>
         {{ end }}
     </div>
-    <a href="/videos/" class="section-cta">All Videos →</a>
+    <a href="{{ "videos/" | relURL }}" class="section-cta">All Videos →</a>
 </section>
 
 {{ partial "adsense-ad.html" (dict "slot" "bottom") }}

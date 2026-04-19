@@ -2,7 +2,7 @@
 <article class="experiment-detail">
     <h1>{{ .Title }}</h1>
     <div class="experiment-meta">
-        {{ with .Params.related_book }}<a href="/ebooks/{{ . }}/" class="related-book">📖 Related Book</a>{{ end }}
+        {{ with .Params.related_book }}<a href="{{ printf "ebooks/%s/" . | relURL }}" class="related-book">📖 Related Book</a>{{ end }}
         <span class="experiment-type">{{ if eq .Params.sim_type "custom" }}Interactive Simulation{{ else }}PhET Simulation{{ end }}</span>
     </div>
     {{ partial "experiment-sim.html" . }}

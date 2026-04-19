@@ -13,7 +13,7 @@
     </div>
     {{ else }}
     <div class="book-card">
-        {{ with .Params.cover }}<img src="{{ . }}" alt="{{ $.Title }} cover" loading="lazy">{{ end }}
+        {{ with .Params.cover }}<img src="{{ . | relURL }}" alt="{{ $.Title }} cover" loading="lazy">{{ end }}
         <span class="book-number">Book {{ .Params.book_number }}</span>
         <h3>{{ .Title }}</h3>
         <p class="book-topic">{{ .Params.topic }}</p>
