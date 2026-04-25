@@ -54,6 +54,33 @@
 
 {{ partial "adsense-ad.html" (dict "slot" "hero-bottom") }}
 
+<section class="about-section reveal">
+    <div class="about-content">
+        <h2 class="section-title">What is Physicstantra?</h2>
+        <p class="about-lead">Inspired by the timeless <strong>Panchatantra</strong>, which taught wisdom through animal tales, <strong>Physics Tantra</strong> teaches physics the same way — through stories children actually want to read.</p>
+        <p>Each book follows a curious animal hero on an adventure that brings one big physics idea to life. No formulas to memorize. No textbooks to dread. Just vivid characters, real science, and the kind of storytelling that makes difficult concepts feel effortless.</p>
+        <p>From gravity to quantum mechanics, from light to spacetime — children absorb deep physics naturally, the way they absorb a good story: without even realizing they're learning.</p>
+        <div class="about-highlights">
+            <div class="about-highlight-item">
+                <span class="about-highlight-icon">&#x1F4D6;</span>
+                <h4>Learn Through Stories</h4>
+                <p>Physics concepts woven into unforgettable animal adventures that kids love</p>
+            </div>
+            <div class="about-highlight-item">
+                <span class="about-highlight-icon">&#x1F52C;</span>
+                <h4>Real Science, Zero Dread</h4>
+                <p>No formulas to memorize — just vivid characters and real-world examples</p>
+            </div>
+            <div class="about-highlight-item">
+                <span class="about-highlight-icon">&#x2728;</span>
+                <h4>Spark Curiosity</h4>
+                <p>Perfect for vacation reads, bedtime chapters, or any moment a child asks "why?"</p>
+            </div>
+        </div>
+        <p class="about-closing">Physics Tantra turns that spark of curiosity into a lifelong love of science.</p>
+    </div>
+</section>
+
 <section class="featured-section reveal">
     <h2 class="section-title">Featured Book</h2>
     <p class="section-description">Physics stories that spark wonder and curiosity in young readers.</p>
@@ -100,15 +127,9 @@
     <p class="section-description">Curated physics videos from the best science educators.</p>
     {{ with site.GetPage "/videos/elon-musk-studying-physics" }}
     <div class="featured-video">
-        <div class="featured-video-embed">
-            <iframe
-                srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:62px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/{{ .Params.youtube_id }}?autoplay=1><img src=https://img.youtube.com/vi/{{ .Params.youtube_id }}/maxresdefault.jpg alt='{{ .Title }}'><span>&#x25B6;</span></a>"
-                sandbox="allow-scripts allow-same-origin allow-popups"
-                loading="lazy"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                title="{{ .Title }}">
-            </iframe>
+        <div class="featured-video-embed" data-id="{{ .Params.youtube_id }}">
+            <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/maxresdefault.jpg" alt="{{ .Title }}" loading="lazy">
+            <span class="play-btn">&#x25B6;</span>
         </div>
         <div class="featured-video-info">
             <h3>{{ .Title }}</h3>
