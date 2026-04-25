@@ -3,7 +3,7 @@
     <h1>{{ .Title }}</h1>
     <p>Interactive physics simulations — learn by playing!</p>
 </section>
-<div class="experiment-grid">
+<div class="experiment-grid" style="max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem 3rem;">
     {{ range .Pages }}
     <div class="experiment-card">
         <div class="experiment-icon">
@@ -12,6 +12,7 @@
         <h3>{{ .Title }}</h3>
         <p>{{ .Description }}</p>
         <span class="experiment-type">{{ if eq .Params.sim_type "custom" }}Interactive Sim{{ else }}PhET Simulation{{ end }}</span>
+        <br>
         <a href="{{ .Permalink }}" class="card-link">Launch</a>
     </div>
     {{ end }}

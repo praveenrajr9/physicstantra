@@ -3,30 +3,34 @@
     <h1>{{ .Title }}</h1>
     <p>Curated physics videos from the best science educators on YouTube.</p>
 </section>
-<div class="category-filter">
-    <button class="filter-btn active" data-category="all">All</button>
-    {{ range site.Data.video_categories }}
-    <button class="filter-btn" data-category="{{ .slug }}">{{ .name }}</button>
-    {{ end }}
-</div>
-<div class="video-grid full">
-    {{ range .Pages }}
-    <div class="video-card" data-category="{{ .Params.category }}">
-        <div class="video-embed">
-            <iframe
-                srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/{{ .Params.youtube_id }}?autoplay=1><img src=https://img.youtube.com/vi/{{ .Params.youtube_id }}/hqdefault.jpg alt='{{ .Title }}'><span>▶</span></a>"
-                sandbox="allow-scripts allow-same-origin allow-popups"
-                loading="lazy"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                title="{{ .Title }}">
-            </iframe>
-        </div>
-        <h3>{{ .Title }}</h3>
-        <span class="video-category-tag">{{ .Params.category }}</span>
-        <p>{{ .Description }}</p>
+<div style="max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem 3rem;">
+    <div class="category-filter">
+        <button class="filter-btn active" data-category="all">All</button>
+        {{ range site.Data.video_categories }}
+        <button class="filter-btn" data-category="{{ .slug }}">{{ .name }}</button>
+        {{ end }}
     </div>
-    {{ end }}
+    <div class="video-grid full">
+        {{ range .Pages }}
+        <div class="video-card" data-category="{{ .Params.category }}">
+            <div class="video-embed">
+                <iframe
+                    srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/{{ .Params.youtube_id }}?autoplay=1><img src=https://img.youtube.com/vi/{{ .Params.youtube_id }}/hqdefault.jpg alt='{{ .Title }}'><span>&#x25B6;</span></a>"
+                    sandbox="allow-scripts allow-same-origin allow-popups"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    title="{{ .Title }}">
+                </iframe>
+            </div>
+            <div class="video-card-content">
+                <h3>{{ .Title }}</h3>
+                <span class="video-category-tag">{{ .Params.category }}</span>
+                <p>{{ .Description }}</p>
+            </div>
+        </div>
+        {{ end }}
+    </div>
 </div>
 <script>
 document.querySelectorAll('.filter-btn').forEach(btn => {

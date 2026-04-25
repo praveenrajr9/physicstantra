@@ -14,6 +14,9 @@
     <nav class="site-nav">
         <div class="nav-container">
             <a href="{{ "/" | relURL }}" class="nav-logo">Physicstantra</a>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
             <div class="nav-links">
                 {{ range .Site.Menus.main }}
                 <a href="{{ .URL }}" class="nav-link"{{ if .Params.external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Name }}</a>
@@ -31,6 +34,116 @@
             <p>&copy; {{ now.Year }} Physicstantra. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+    /* --- Nav scroll shadow --- */
+    (function() {
+        var nav = document.querySelector('.site-nav');
+        if (!nav) return;
+        window.addEventListener('scroll', function() {
+            nav.classList.toggle('scrolled', window.scrollY > 20);
+        }, { passive: true });
+    })();
+
+    /* --- Scroll reveal --- */
+    (function() {
+        var reveals = document.querySelectorAll('.reveal');
+        if (!reveals.length) return;
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        reveals.forEach(function(el) { observer.observe(el); });
+    })();
+
+    /* --- Quotes slider --- */
+    (function() {
+        var slider = document.getElementById('quotesSlider');
+        var dotsContainer = document.getElementById('sliderDots');
+        if (!slider || !dotsContainer) return;
+        var slides = slider.querySelectorAll('.quote-slide');
+        if (slides.length < 2) return;
+        var current = 0;
+        var interval;
+
+        // Build dots
+        for (var i = 0; i < slides.length; i++) {
+            var dot = document.createElement('button');
+            dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', 'Quote ' + (i + 1));
+            dot.dataset.index = i;
+            dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
+            dotsContainer.appendChild(dot);
+        }
+        var dots = dotsContainer.querySelectorAll('.slider-dot');
+
+        function goTo(index) {
+            slides[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = index;
+            slides[current].classList.add('active');
+            dots[current].classList.add('active');
+        }
+
+        function next() { goTo((current + 1) % slides.length); }
+
+        function startAuto() { interval = setInterval(next, 4000); }
+        function stopAuto() { clearInterval(interval); }
+
+        slider.addEventListener('mouseenter', stopAuto);
+        slider.addEventListener('mouseleave', startAuto);
+        startAuto();
+    })();
+
+    /* --- Book carousel --- */
+    (function() {
+        var track = document.getElementById('carouselTrack');
+        var dotsContainer = document.getElementById('carouselDots');
+        if (!track || !dotsContainer) return;
+        var slides = track.querySelectorAll('.carousel-slide');
+        if (slides.length < 2) return;
+        var current = 0;
+
+        // Build dots
+        for (var i = 0; i < slides.length; i++) {
+            var dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', 'Page ' + (i + 1));
+            dot.dataset.index = i;
+            dot.addEventListener('click', function() {
+                goToSlide(parseInt(this.dataset.index));
+            });
+            dotsContainer.appendChild(dot);
+        }
+        var dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+        function goToSlide(index) {
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+            dots[current].classList.remove('active');
+            current = index;
+            dots[current].classList.add('active');
+            track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        }
+
+        window.moveCarousel = function(dir) { goToSlide(current + dir); };
+
+        // Auto-advance every 6 seconds
+        var autoInterval = setInterval(function() { goToSlide(current + 1); }, 6000);
+        var carousel = document.getElementById('bookCarousel');
+        if (carousel) {
+            carousel.addEventListener('mouseenter', function() { clearInterval(autoInterval); });
+            carousel.addEventListener('mouseleave', function() {
+                autoInterval = setInterval(function() { goToSlide(current + 1); }, 6000);
+            });
+        }
+    })();
+    </script>
+
     {{ block "scripts" . }}{{ end }}
 </body>
 </html>

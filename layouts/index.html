@@ -1,5 +1,13 @@
 {{ define "main" }}
 <section class="hero hero-with-sidebar">
+    <!-- Floating physics decorations -->
+    <div class="hero-decoration atom-1"></div>
+    <div class="hero-decoration atom-2"></div>
+    <div class="hero-decoration orbit-ring"></div>
+    <div class="hero-decoration dot-1"></div>
+    <div class="hero-decoration dot-2"></div>
+    <div class="hero-decoration dot-3"></div>
+
     <div class="hero-content">
         <h1 class="hero-title">Physicstantra</h1>
         <p class="hero-subtitle">Where Science Meets Storytelling</p>
@@ -7,51 +15,92 @@
         <a href="{{ "ebooks/" | relURL }}" class="cta-button">Explore the Series</a>
     </div>
     <aside class="hero-sidebar">
-        <div class="tweets-panel">
-            <h3 class="tweets-panel-title">Physics on X</h3>
-            <p class="tweets-panel-subtitle">What celebrities are saying about physics</p>
-            <div class="tweets-list">
-                <blockquote class="twitter-tweet" data-theme="light" data-conversation="none">
-                    <p>Physics is the law, everything else is a recommendation.</p>
-                    &mdash; Elon Musk (@elonmusk)
-                    <a href="https://x.com/elonmusk/status/1590643895718514689">November 10, 2022</a>
-                </blockquote>
-
-                <blockquote class="twitter-tweet" data-theme="light" data-conversation="none">
-                    <p>The universe is under no obligation to make sense to you.</p>
-                    &mdash; Neil deGrasse Tyson (@neiltyson)
-                    <a href="https://x.com/neiltyson/status/940252082892861442">December 11, 2017</a>
-                </blockquote>
-
-                <blockquote class="twitter-tweet" data-theme="light" data-conversation="none">
-                    <p>Not only is the Universe stranger than we think, it is stranger than we can think.</p>
-                    &mdash; Prof Brian Cox (@ProfBrianCox)
-                    <a href="https://x.com/ProfBrianCox/status/1087654268621897728">January 22, 2019</a>
-                </blockquote>
-
-                <blockquote class="twitter-tweet" data-theme="light" data-conversation="none">
-                    <p>Science is not only a disciple of reason but, also, one of romance and passion.</p>
-                    &mdash; Michio Kaku (@miaboricua)
-                    <a href="https://x.com/miaboricua/status/1234567890">March 1, 2020</a>
-                </blockquote>
-
-                <blockquote class="twitter-tweet" data-theme="light" data-conversation="none">
-                    <p>Somewhere, something incredible is waiting to be known.</p>
-                    &mdash; Carl Sagan (via @CarlSaganQuotes)
-                    <a href="https://x.com/CarlSaganQuotes/status/1456789012345">October 15, 2021</a>
-                </blockquote>
+        <div class="quotes-panel">
+            <h3 class="quotes-panel-title">What They Say About Physics</h3>
+            <p class="quotes-panel-subtitle">Wisdom from brilliant minds</p>
+            <div class="quotes-slider" id="quotesSlider">
+                <div class="quote-slide active">
+                    <p class="quote-text">Physics is the law, everything else is a recommendation.</p>
+                    <p class="quote-author">Elon Musk <span class="quote-handle">@elonmusk</span></p>
+                </div>
+                <div class="quote-slide">
+                    <p class="quote-text">The universe is under no obligation to make sense to you.</p>
+                    <p class="quote-author">Neil deGrasse Tyson <span class="quote-handle">@neiltyson</span></p>
+                </div>
+                <div class="quote-slide">
+                    <p class="quote-text">Not only is the Universe stranger than we think, it is stranger than we can think.</p>
+                    <p class="quote-author">Prof Brian Cox <span class="quote-handle">@ProfBrianCox</span></p>
+                </div>
+                <div class="quote-slide">
+                    <p class="quote-text">Science is not only a disciple of reason but, also, one of romance and passion.</p>
+                    <p class="quote-author">Michio Kaku</p>
+                </div>
+                <div class="quote-slide">
+                    <p class="quote-text">Somewhere, something incredible is waiting to be known.</p>
+                    <p class="quote-author">Carl Sagan</p>
+                </div>
             </div>
+            <div class="slider-dots" id="sliderDots"></div>
         </div>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </aside>
 </section>
 
+<!-- Wave divider: hero to content -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M0,60 C360,0 720,40 1080,10 C1260,0 1380,20 1440,30 L1440,60 Z" fill="#f0f7ff"/>
+    </svg>
+</div>
+
 {{ partial "adsense-ad.html" (dict "slot" "hero-bottom") }}
 
-<section class="featured-section">
+<section class="featured-section reveal">
     <h2 class="section-title">Featured Books</h2>
+    <p class="section-description">Physics stories that spark wonder and curiosity in young readers.</p>
+
+    {{ $books := (where .Site.RegularPages "Section" "ebooks").ByParam "book_number" }}
+    {{ $totalBooks := len $books }}
+
+    {{ if gt $totalBooks 3 }}
+    <!-- Book Carousel for 4+ books -->
+    <div class="book-carousel" id="bookCarousel">
+        <div class="carousel-track" id="carouselTrack">
+            {{ $perSlide := 3 }}
+            {{ $slides := int (math.Ceil (div (float $totalBooks) (float $perSlide))) }}
+            {{ range $i := seq $slides }}
+            <div class="carousel-slide">
+                {{ $start := mul (sub $i 1) $perSlide }}
+                {{ range $books | after $start | first $perSlide }}
+                {{ if .Params.coming_soon }}
+                <div class="book-card coming-soon">
+                    <div class="card-coming-soon-overlay">
+                        <span class="card-coming-soon-text">Coming Soon</span>
+                    </div>
+                </div>
+                {{ else }}
+                <div class="book-card">
+                    {{ with .Params.cover }}<img src="{{ . | relURL }}" alt="{{ $.Title }} cover" loading="lazy">{{ end }}
+                    <div class="book-card-content">
+                        <span class="book-number">Book {{ .Params.book_number }}</span>
+                        <h3>{{ .Title }}</h3>
+                        <p class="book-topic">{{ .Params.topic }}</p>
+                        <p class="book-age">Ages {{ .Params.age_range }}</p>
+                        <a href="{{ .Permalink }}" class="card-link">Learn More</a>
+                    </div>
+                </div>
+                {{ end }}
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+        <button class="carousel-btn prev" onclick="moveCarousel(-1)" aria-label="Previous">&larr;</button>
+        <button class="carousel-btn next" onclick="moveCarousel(1)" aria-label="Next">&rarr;</button>
+        <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+    {{ else }}
+    <!-- Simple grid for 3 or fewer books -->
     <div class="book-grid">
-        {{ range first 3 ((where .Site.RegularPages "Section" "ebooks").ByParam "book_number") }}
+        {{ range first 3 $books }}
         {{ if .Params.coming_soon }}
         <div class="book-card coming-soon">
             <div class="card-coming-soon-overlay">
@@ -61,20 +110,24 @@
         {{ else }}
         <div class="book-card">
             {{ with .Params.cover }}<img src="{{ . | relURL }}" alt="{{ $.Title }} cover" loading="lazy">{{ end }}
-            <h3>{{ .Title }}</h3>
-            <p class="book-topic">{{ .Params.topic }}</p>
-            <p class="book-age">Ages {{ .Params.age_range }}</p>
-            <a href="{{ .Permalink }}" class="card-link">Learn More</a>
+            <div class="book-card-content">
+                <span class="book-number">Book {{ .Params.book_number }}</span>
+                <h3>{{ .Title }}</h3>
+                <p class="book-topic">{{ .Params.topic }}</p>
+                <p class="book-age">Ages {{ .Params.age_range }}</p>
+                <a href="{{ .Permalink }}" class="card-link">Learn More</a>
+            </div>
         </div>
         {{ end }}
         {{ end }}
     </div>
-    <a href="{{ "ebooks/" | relURL }}" class="section-cta">View All Books →</a>
+    {{ end }}
+    <a href="{{ "ebooks/" | relURL }}" class="section-cta">View All Books</a>
 </section>
 
 {{ partial "adsense-ad.html" (dict "slot" "mid-page") }}
 
-<section class="featured-section">
+<section class="featured-section reveal">
     <h2 class="section-title">Try an Experiment</h2>
     <p class="section-description">Interactive physics simulations you can play with right in your browser.</p>
     <div class="experiment-preview">
@@ -86,23 +139,26 @@
         </div>
         {{ end }}
     </div>
-    <a href="{{ "experiments/" | relURL }}" class="section-cta">All Experiments →</a>
+    <a href="{{ "experiments/" | relURL }}" class="section-cta">All Experiments</a>
 </section>
 
-<section class="featured-section">
+<section class="featured-section reveal">
     <h2 class="section-title">Watch &amp; Learn</h2>
+    <p class="section-description">Curated physics videos from the best science educators.</p>
     <div class="video-grid">
         {{ range first 3 (where .Site.RegularPages "Section" "videos") }}
         <div class="video-card">
             <div class="video-thumb">
                 <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/mqdefault.jpg" alt="{{ .Title }}" loading="lazy">
             </div>
-            <h3>{{ .Title }}</h3>
-            <span class="video-category">{{ .Params.category }}</span>
+            <div class="video-card-content">
+                <h3>{{ .Title }}</h3>
+                <span class="video-category">{{ .Params.category }}</span>
+            </div>
         </div>
         {{ end }}
     </div>
-    <a href="{{ "videos/" | relURL }}" class="section-cta">All Videos →</a>
+    <a href="{{ "videos/" | relURL }}" class="section-cta">All Videos</a>
 </section>
 
 {{ partial "adsense-ad.html" (dict "slot" "bottom") }}

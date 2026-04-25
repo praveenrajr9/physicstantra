@@ -1,9 +1,14 @@
 {{ if eq .Params.sim_type "custom" }}
-<div class="sim-container" id="sim-canvas"></div>
+<div class="sim-wrapper">
+    <div class="sim-container" id="sim-canvas"></div>
+    <div class="sim-controls" id="sim-controls"></div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 <script src="{{ printf "js/experiments/%s" .Params.sim_file | relURL }}"></script>
 {{ else if eq .Params.sim_type "phet" }}
-<div class="sim-container phet-embed">
-    <iframe src="{{ .Params.phet_url }}" sandbox="allow-scripts allow-same-origin" allowfullscreen loading="lazy"></iframe>
+<div class="sim-wrapper">
+    <div class="sim-container phet-embed">
+        <iframe src="{{ .Params.phet_url }}" sandbox="allow-scripts allow-same-origin" allowfullscreen loading="lazy"></iframe>
+    </div>
 </div>
 {{ end }}
