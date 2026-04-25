@@ -55,71 +55,24 @@
 {{ partial "adsense-ad.html" (dict "slot" "hero-bottom") }}
 
 <section class="featured-section reveal">
-    <h2 class="section-title">Featured Books</h2>
+    <h2 class="section-title">Featured Book</h2>
     <p class="section-description">Physics stories that spark wonder and curiosity in young readers.</p>
-
     {{ $books := (where .Site.RegularPages "Section" "ebooks").ByParam "book_number" }}
-    {{ $totalBooks := len $books }}
-
-    {{ if gt $totalBooks 3 }}
-    <!-- Book Carousel for 4+ books -->
-    <div class="book-carousel" id="bookCarousel">
-        <div class="carousel-track" id="carouselTrack">
-            {{ $perSlide := 3 }}
-            {{ $slides := int (math.Ceil (div (float $totalBooks) (float $perSlide))) }}
-            {{ range $i := seq $slides }}
-            <div class="carousel-slide">
-                {{ $start := mul (sub $i 1) $perSlide }}
-                {{ range $books | after $start | first $perSlide }}
-                {{ if .Params.coming_soon }}
-                <div class="book-card coming-soon">
-                    <div class="card-coming-soon-overlay">
-                        <span class="card-coming-soon-text">Coming Soon</span>
-                    </div>
-                </div>
-                {{ else }}
-                <div class="book-card">
-                    {{ with .Params.cover }}<img src="{{ . | relURL }}" alt="{{ $.Title }} cover" loading="lazy">{{ end }}
-                    <div class="book-card-content">
-                        <span class="book-number">Book {{ .Params.book_number }}</span>
-                        <h3>{{ .Title }}</h3>
-                        <p class="book-topic">{{ .Params.topic }}</p>
-                        <p class="book-age">Ages {{ .Params.age_range }}</p>
-                        <a href="{{ .Permalink }}" class="card-link">Learn More</a>
-                    </div>
-                </div>
-                {{ end }}
-                {{ end }}
-            </div>
-            {{ end }}
-        </div>
-        <button class="carousel-btn prev" onclick="moveCarousel(-1)" aria-label="Previous">&larr;</button>
-        <button class="carousel-btn next" onclick="moveCarousel(1)" aria-label="Next">&rarr;</button>
-        <div class="carousel-dots" id="carouselDots"></div>
-    </div>
-    {{ else }}
-    <!-- Simple grid for 3 or fewer books -->
-    <div class="book-grid">
-        {{ range first 3 $books }}
-        {{ if .Params.coming_soon }}
-        <div class="book-card coming-soon">
-            <div class="card-coming-soon-overlay">
-                <span class="card-coming-soon-text">Coming Soon</span>
-            </div>
-        </div>
-        {{ else }}
-        <div class="book-card">
-            {{ with .Params.cover }}<img src="{{ . | relURL }}" alt="{{ $.Title }} cover" loading="lazy">{{ end }}
-            <div class="book-card-content">
-                <span class="book-number">Book {{ .Params.book_number }}</span>
-                <h3>{{ .Title }}</h3>
-                <p class="book-topic">{{ .Params.topic }}</p>
-                <p class="book-age">Ages {{ .Params.age_range }}</p>
-                <a href="{{ .Permalink }}" class="card-link">Learn More</a>
-            </div>
+    {{ with index $books 0 }}
+    <div class="featured-book">
+        {{ with .Params.cover }}
+        <div class="featured-book-cover">
+            <img src="{{ . | relURL }}" alt="{{ $.Title }} cover" loading="lazy">
         </div>
         {{ end }}
-        {{ end }}
+        <div class="featured-book-info">
+            <span class="featured-book-badge">Book {{ .Params.book_number }}</span>
+            <h3>{{ .Title }}</h3>
+            <p class="featured-book-topic">{{ .Params.topic }}</p>
+            <p class="featured-book-desc">{{ .Description }}</p>
+            <p class="featured-book-age">Ages {{ .Params.age_range }}</p>
+            <a href="{{ .Permalink }}" class="cta-button">Read More</a>
+        </div>
     </div>
     {{ end }}
     <a href="{{ "ebooks/" | relURL }}" class="section-cta">View All Books</a>
@@ -145,8 +98,29 @@
 <section class="featured-section reveal">
     <h2 class="section-title">Watch &amp; Learn</h2>
     <p class="section-description">Curated physics videos from the best science educators.</p>
+    {{ with site.GetPage "/videos/elon-musk-studying-physics" }}
+    <div class="featured-video">
+        <div class="featured-video-embed">
+            <iframe
+                srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:62px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/{{ .Params.youtube_id }}?autoplay=1><img src=https://img.youtube.com/vi/{{ .Params.youtube_id }}/maxresdefault.jpg alt='{{ .Title }}'><span>&#x25B6;</span></a>"
+                sandbox="allow-scripts allow-same-origin allow-popups"
+                loading="lazy"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                title="{{ .Title }}">
+            </iframe>
+        </div>
+        <div class="featured-video-info">
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Description }}</p>
+        </div>
+    </div>
+    {{ end }}
     <div class="video-grid">
-        {{ range first 3 (where .Site.RegularPages "Section" "videos") }}
+        {{ $featured := "elon-musk-studying-physics" }}
+        {{ $videos := where .Site.RegularPages "Section" "videos" }}
+        {{ $filtered := where $videos ".File.ContentBaseName" "!=" $featured }}
+        {{ range first 3 $filtered.ByWeight }}
         <div class="video-card">
             <div class="video-thumb">
                 <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/mqdefault.jpg" alt="{{ .Title }}" loading="lazy">
