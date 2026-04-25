@@ -13,15 +13,9 @@
     <div class="video-grid full">
         {{ range .Pages }}
         <div class="video-card" data-category="{{ .Params.category }}">
-            <div class="video-embed">
-                <iframe
-                    srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/{{ .Params.youtube_id }}?autoplay=1><img src=https://img.youtube.com/vi/{{ .Params.youtube_id }}/hqdefault.jpg alt='{{ .Title }}'><span>&#x25B6;</span></a>"
-                    sandbox="allow-scripts allow-same-origin allow-popups"
-                    loading="lazy"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                    title="{{ .Title }}">
-                </iframe>
+            <div class="video-embed" data-id="{{ .Params.youtube_id }}">
+                <img src="https://img.youtube.com/vi/{{ .Params.youtube_id }}/hqdefault.jpg" alt="{{ .Title }}" loading="lazy">
+                <span class="play-btn">&#x25B6;</span>
             </div>
             <div class="video-card-content">
                 <h3>{{ .Title }}</h3>
@@ -41,6 +35,20 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
         document.querySelectorAll('.video-card').forEach(card => {
             card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
         });
+    });
+});
+document.querySelectorAll('.video-embed[data-id]').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', () => {
+        const id = el.dataset.id;
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+        iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+        iframe.style.cssText = 'width:100%;height:100%;border:none;position:absolute;top:0;left:0';
+        el.style.position = 'relative';
+        el.innerHTML = '';
+        el.appendChild(iframe);
     });
 });
 </script>

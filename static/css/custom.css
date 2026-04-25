@@ -1353,6 +1353,30 @@ img {
 .video-embed {
   aspect-ratio: 16 / 9;
   overflow: hidden;
+  position: relative;
+}
+
+.video-embed img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-embed .play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  color: #fff;
+  text-shadow: 0 0 0.5em rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  transition: transform 0.2s ease;
+}
+
+.video-embed:hover .play-btn {
+  transform: translate(-50%, -50%) scale(1.2);
 }
 
 .video-embed iframe {
