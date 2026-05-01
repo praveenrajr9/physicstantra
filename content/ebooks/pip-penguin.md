@@ -1,9 +1,9 @@
 ---
 title: "Pip the Penguin and the Question Machine"
-book_number: 9
+book_number: 0
 hero: "Pip the Penguin"
 topic: "Scientific Thinking"
-cover: "/images/books/book9-cover.jpg"
+cover: "/images/books/book0-cover.jpg"
 lulu_url: "https://www.lulu.com/shop/praveenraj-r/pip-the-penguin-and-the-question-machine/paperback/product-2mdn4jg.html"
 age_range: "8+"
 description: "Join Pip the Penguin as he builds a Question Machine and discovers that asking the right questions is the most powerful tool in science."
