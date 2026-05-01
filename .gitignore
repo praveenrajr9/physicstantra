@@ -2,3 +2,4 @@
 .deploy_key.pub
 public/
 resources/
+.DS_Store
