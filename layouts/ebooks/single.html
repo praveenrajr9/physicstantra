@@ -23,9 +23,14 @@
                 <span class="meta-item">Ages: {{ .Params.age_range }}</span>
             </div>
             <div class="book-description">{{ .Content }}</div>
+            <div class="buy-buttons">
             {{ with .Params.affiliate_url }}
             <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="affiliate-button">Buy on Amazon</a>
             {{ end }}
+            {{ with .Params.lulu_url }}
+            <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="affiliate-button lulu-button">Buy on Lulu</a>
+            {{ end }}
+            </div>
         </div>
     </div>
     {{ partial "affiliate-disclosure.html" . }}
